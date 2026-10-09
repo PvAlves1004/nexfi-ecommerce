@@ -31,12 +31,12 @@ public class LojaController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(lojaService.criar(lojaRequest));
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping
 	public List<LojaResponse> listar(){
 		return lojaService.listar();
 	}
 	
-	@GetMapping
+	@GetMapping("/{id}")
 	public LojaResponse buscarPorId(@PathVariable Long id) {
 		return lojaService.buscarPorId(id);
 	}

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.nexfi.ecommerce.dto.LojaRequest;
 import com.nexfi.ecommerce.dto.LojaResponse;
+import com.nexfi.ecommerce.exception.ConflitoException;
+import com.nexfi.ecommerce.exception.RecursoNaoEncontradoException;
 import com.nexfi.ecommerce.model.Loja;
 import com.nexfi.ecommerce.repository.LojaRepository;
 
@@ -24,7 +26,7 @@ public class LojaService {
 	public LojaResponse criar(LojaRequest lojaRequest) {
 
 		if (lojaRepository.existsByCnpj(lojaRequest.cnpj())) {
-			throw new IllegalArgumentException("CNPJ ja cadastrado!");
+			throw new ConflitoException("CNPJ ja cadastrado!");
 		}
 		Loja loja = new Loja(lojaRequest.cnpj(), lojaRequest.nome());
 		Loja lojaSalva = lojaRepository.save(loja);
@@ -42,7 +44,7 @@ public class LojaService {
 				
 		return lojaRepository.findById(id)
 				.map(LojaResponse::de)
-				.orElseThrow(() -> new IllegalArgumentException("Loja não encontrada"));
+				.orElseThrow(() -> new RecursoNaoEncontradoException("Loja não encontrada"));
 				
 	}
 

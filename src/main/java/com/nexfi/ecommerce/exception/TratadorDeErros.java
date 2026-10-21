@@ -11,8 +11,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.nexfi.ecommerce.model.Loja;
-
 @RestControllerAdvice
 public class TratadorDeErros {
 	
@@ -38,5 +36,11 @@ public class TratadorDeErros {
 		problema.setProperty("campos", campos);
 		return problema;
 	}
+	
+	@ExceptionHandler(EstoqueInsuficienteException.class)
+	public ProblemDetail tratarEstoqueInsuficiente(EstoqueInsuficienteException e) {
+		return ProblemDetail.forStatusAndDetail(HttpStatus.UNPROCESSABLE_CONTENT, e.getMessage());
+	}
+	
 
 }

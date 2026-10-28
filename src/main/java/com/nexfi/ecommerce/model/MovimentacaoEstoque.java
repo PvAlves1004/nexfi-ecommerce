@@ -100,7 +100,7 @@ public class MovimentacaoEstoque {
 			throw new IllegalStateException("Tipo de objeto incorreto");
 		}
 		if (quantidadeConsumida <= 0) {
-			throw new IllegalArgumentException("Quantidade invalida!");
+			throw new IllegalArgumentException("Quantidade inválida!");
 		}
 		if (this.quantidadeRestante - quantidadeConsumida < 0) {
 			throw new EstoqueInsuficienteException("Estoque insuficiente!");
@@ -116,7 +116,7 @@ public class MovimentacaoEstoque {
 			throw new IllegalArgumentException("Quantidade invalida!");
 		}
 		if (this.quantidadeRestante + quantidadeDevolvida > this.quantidade) {
-			throw new IllegalStateException("Quantidade incompativel com o lote");
+			throw new IllegalStateException("Quantidade incompatível com o lote");
 		}
 
 		this.quantidadeRestante = this.quantidadeRestante + quantidadeDevolvida;
